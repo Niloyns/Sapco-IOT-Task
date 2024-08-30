@@ -66,6 +66,7 @@ function App() {
     fetch('/users')
       .then(res => res.json())
       .then(data => setUsers(data));
+      .catch(error => console.error('Error', error));
   }, []);
 
   const addUser = () => {
@@ -78,6 +79,7 @@ function App() {
     })
       .then(res => res.json())
       .then(user => setUsers([...users, user]));
+      .catch(error => console.error('Error', error));
   };
 
   return (
