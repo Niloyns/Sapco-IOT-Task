@@ -37,15 +37,19 @@ const User = mongoose.model('User', userSchema);
 app.use(express.json());
 
 app.get('/users', async (req, res) => {
-  const users = await User.find();
-  res.json(users);
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 });
 
 app.post('/users', async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();
-        res.status(201).json(user);
+        res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }
