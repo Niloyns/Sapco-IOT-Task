@@ -1,3 +1,7 @@
+// Setup App and replace server.js file with this file.
+// We have placed multiple bugs in this file, your task is to debug and fix as many as possible.
+// Please note the bugs and write a bried about the bug and steps you took to solve it.
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -21,6 +25,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
       },
+      email: { 
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -38,7 +47,7 @@ app.post('/users', async (req, res) => {
         await user.save();
         res.status(201).json(user);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message }); 
     }
 });
 
